@@ -9,37 +9,50 @@
 		<button id="getPosts">Get Data</button><br>
 			<input type="checkbox" value="abc-news" id="abc" class="checkbox" >abc
 			<input type="checkbox" value="bbc-news" id="bbc"  class="checkbox">bbc
-			<input type="checkbox" value="toi-news" id="toi"  class="checkbox">TOI
+			<input type="checkbox" value="bbc-sport" id="bbcsport"  class="checkbox">BBC Sports
 			<input type="checkbox" value="espn" id="espn"  class="checkbox">ESPN
 			<input type="checkbox" value="business-insider" id="businessinsider"  class="checkbox">Business Insider
 			<input type="checkbox" value="buzzfeed" id="buzzfeed"  class="checkbox">Buzzfeed
 			<input type="checkbox" value="cnbc" id="cnbc"  class="checkbox">CNBC
 			<input type="checkbox" value="cnn" id="cnn"  class="checkbox">CNN
+			<br>
+			<br>
+			<br>
+			<div>
+				<button value="abc-news" class="btn11">ABC</button>
+				<button value="bbc-news"  class="btn11">BBC</button>
+				<button value="bbc-sport"  class="btn11">BBC Sports</button>
+				<button value="espn"  class="btn11">ESPN</button>
+				<button value="business-insider"  class="btn11"> BusinessInsider</button>
+				<button value="buzzfeed"  class="btn11">Buzzfeed</button>
+				<button value="cnbc"  class="btn11">CNBC</button>
+				<button value="cnn"  class="btn11">CNN</button>
+			</div>
 		<div id="id1">
 			
 		</div>
 	<script>
 		document.getElementById('getPosts').addEventListener('click',getPosts);
-		document.getElementById('abc').addEventListener('click',isChecked);
-		document.getElementById('toi').addEventListener('click',isChecked);
-		document.getElementById('bbc').addEventListener('click',isChecked);
-		document.getElementById('espn').addEventListener('click',isChecked);
-		document.getElementById('businessinsider').addEventListener('click',isChecked);
-		document.getElementById('buzzfeed').addEventListener('click',isChecked);
-		document.getElementById('cnbc').addEventListener('click',isChecked);
-		document.getElementById('cnn').addEventListener('click',isChecked);
-		var a=document.getElementById('id2').value;
-		let url='https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=974f4f5910d14073b1d064c3d0010860';
+		//document.getElementById('abc').addEventListener('click',isChecked);
+		//document.getElementById('toi').addEventListener('click',isChecked);
+		//document.getElementById('bbc').addEventListener('click',isChecked);
+		//document.getElementById('espn').addEventListener('click',isChecked);
+		//document.getElementById('businessinsider').addEventListener('click',isChecked);
+		//document.getElementById('buzzfeed').addEventListener('click',isChecked);
+		//document.getElementById('cnbc').addEventListener('click',isChecked);
+		//document.getElementById('cnn').addEventListener('click',isChecked);
+		//var a=document.getElementById('id2').value;
+		//let url='https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=974f4f5910d14073b1d064c3d0010860';
 		
-		fetch(url).then((res)=>res.json())
+		fetch('https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=974f4f5910d14073b1d064c3d0010860').then((res)=>res.json())
 			.then(data=>{
 				let result=  `<h2>Headline</h2>`;
-				for(let i=0;i<=data.articles.length;i++)
+				for(let i=0;i<=10;i++)
 				{
-				result+=`<h4>Headline  ${data.articles[i].title}</h4>
-					<img src=${data.articles[i].urlToImage} alt="Not Found!!" width:"100px" height="100px">
+				result+=`<a href=${data.articles[i].url}><h4>Headline  ${data.articles[i].title}</h4></a>
+					<!--<img src=${data.articles[i].urlToImage} alt="Not Found!!" width:"100px" height="100px">
 					<h6>author  ${data.articles[i].author}</h6>
-					<p>des  ${data.articles[i].description}</p>
+				<p>des  ${data.articles[i].description}</p>-->
 				`;
 				 document.getElementById('id1').innerHTML = result;
 				 
@@ -52,26 +65,30 @@
 		fetch(url).then((res)=>res.json())
 			.then(data=>{
 				let result=  `<h2>Headline</h2>`;
-				for(let i=0;i<=data.articles.length;i++)
+				for(let i=0;i<data.articles.length;i++)
 				{
-				result+=`<h4>Headline  ${data.articles[i].title}</h4>
+					result+=`<h4>Headline  ${data.articles[i].title}</h4>
 					<img src=${data.articles[i].urlToImage} alt="Not Found!!" width:"100px" height="100px">
 					<h6>author  ${data.articles[i].author}</h6>
 					<p>des  ${data.articles[i].description}</p>
 				`;
 				 document.getElementById('id1').innerHTML = result;
 				 
-				 }
+				 
+				} 
 				
 			});
 		}
 		
+		
 		function getPosts(){
 			var a=document.getElementById('id2').value;
-				url=`https://newsapi.org/v2/everything?q=${a}&apiKey=974f4f5910d14073b1d064c3d0010860`;				
-				post(url);			
-		}
-		function isChecked(){
+			if(a==" ")
+			alert("enter value");
+			
+			else
+			{
+			
 			var arr=[];
 			var checkboxs=document.getElementsByClassName('checkbox');
 			for(var i=0;i<8;i++)
@@ -81,24 +98,41 @@
 					arr.push(checkboxs[i].value);
 				}
 			}
+			if(a.length > 0 && arr== "")
+			{
+				url=`https://newsapi.org/v2/everything?q=${a}&apiKey=974f4f5910d14073b1d064c3d0010860`;				
+				post(url);
+			}
 			
-			var a=document.getElementById('id2').value;
-			if(a==" ")
-			for(var i=0;i<arr.length;i++){
-				url=`https://newsapi.org/v2/everything?q=${arr[i]}&apiKey=974f4f5910d14073b1d064c3d0010860`;
+			if(a.length > 0 && arr.length >0)
+			{
+			
+			console.log(arr.length);
+			
+				console.log(arr);
+				console.log(a);
+				url=`https://newsapi.org/v2/top-headlines?q=${a}&sources=${arr}&apiKey=974f4f5910d14073b1d064c3d0010860`;
 				post(url);
-				
-			}
-			else {
-				for(var i=0;i<arr.length;i++){
-				url=`https://newsapi.org/v2/everything?q=${arr[i]}&source=${a}&apiKey=974f4f5910d14073b1d064c3d0010860`;
-				post(url);
-			}
+			
 			
 		}
 	}
+	}
 	
-	
+
+		var butn=document.getElementsByClassName('btn11');
+		console.log(butn.length);
+		for(let i=0;i<8;i++)
+		{
+			butn[i].addEventListener('click',function(){
+				console.log(this.value);
+				buttons(this.value);
+			})
+		}
+			function buttons(clas){
+					url=`https://newsapi.org/v2/top-headlines?sources=${clas}&apiKey=974f4f5910d14073b1d064c3d0010860`;
+					post(url);
+			}
 	
 	</script>
 </body>
