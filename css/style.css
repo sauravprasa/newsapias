@@ -1,0 +1,87 @@
+.navbar-custom{
+	position: absolute;
+	
+	margin:300px 0 0 0;
+	width:100%;
+	background-color:silver;
+}
+
+.navbar a{
+	color:white;
+	font-weight:bold;
+	font-size:18px;
+
+	
+}
+.navbar li a:hover{
+	background-color:orange;
+	color:white;
+	cursor:pointer
+}
+header{
+	position:absolute;
+	width:100%;
+	height:300px;
+	background-color:silver;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+	
+	
+}
+h3{
+	font-size:80px;
+	text-align: center;
+	color:white;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	text-shadow:3px 5px 2px black;
+}
+.do{
+	position: absolute;
+	
+	margin:400px 0 0 0;
+	width:100%;
+	
+}
+.do input{
+	width: 280px;
+	padding: 10px 5px;
+	border: none;
+	border-bottom: 1px silver solid;
+	outline: none;
+	background: #f1f1f1;
+}
+.do input{
+	margin:0 0 0 450px;
+}
+.do input:hover{
+	border-color:lightgreen;
+}
+.do input:focus{
+	transform:scale(1.1);
+	width:500px;
+	transition: 0.5s;
+	border-color:brown
+}
+.do button{
+	margin:0 0 0 15px;
+	border-radius: 0;
+	width:150px;
+	height:40px;
+}
+.anime{
+	position: absolute;
+	
+	margin:450px 0 0 0;
+	width:100%;
+}
+.panel-heading{
+	font-size: 18px;
+	text-align: center;
+}
+.data{
+	position: absolute;
+	
+	margin:550px 0 0 0;
+	width:100%;
+}
